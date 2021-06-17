@@ -61,12 +61,17 @@ func processImage(path string) {
 		processedImage = img
 	}
 
-	index := strings.LastIndex(path, "/")
-	outPath := output + "/"
-	if index == -1 {
-		outPath += path
+	outPath := ""
+	if len(output) <= 0 {
+		outPath = path
 	} else {
-		outPath += path[index + 1:]
+		index := strings.LastIndex(path, "/")
+		outPath := output + "/"
+		if index == -1 {
+			outPath += path
+		} else {
+			outPath += path[index + 1:]
+		}
 	}
 
 	err = saveImage(processedImage, outPath)
